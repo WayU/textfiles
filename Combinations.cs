@@ -1,17 +1,15 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Combinations : MonoBehaviour
 {
-    // Input buttons
-    public KeyCode function1Key;
-    public KeyCode function2Key;
-    public KeyCode function3Key;
-    public KeyCode function4Key;
+
+    public Text text;
     
     // Interval time between input presses
-    public float interval = 1f;
+    public float interval = 0.2f;
 
     // List of possible correct combination sequences
     List<int[]> correctSequences = new List<int[]>();
@@ -35,6 +33,7 @@ public class Combinations : MonoBehaviour
     {
         // Decrement timer
         timer -= Time.deltaTime;
+
 
         // Check if timer has run out
         if (timer <= 0)
@@ -60,14 +59,16 @@ public class Combinations : MonoBehaviour
                     if (match)
                     {
                         // Activated desired outcome
-                        Debug.Log("Correct combination " + (i+1) + " entered!");
+                        text.text ="Correct combination " + (i+1) + " entered!";
+                        currentSequence.Clear();
                         matches++;
                     }
                 }
             }
             if(matches == 0 && timer == 0.01f)
             {
-                Debug.Log("Incorrect Combination");
+                text.text ="Incorrect Combination";
+                currentSequence.Clear();
             }
             // Reset current sequence and timer
             currentSequence.Clear();
